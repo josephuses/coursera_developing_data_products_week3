@@ -1,0 +1,39 @@
+---
+title: "Using plotly for interactive plots in presentations"
+author: "Joseph S. Tabadero, Jr."
+date: "October 12, 2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+```
+
+## Introduction
+
+The objectives of this project are:
+
+- create a web page presentation using Rmarkdown
+- use interactive plots created with `plotly`.
+
+The source code for this presentation can be found at [my github repo]().
+
+
+## The data
+
+For this exercise, we are going to use the Motor Trend Car Road Tests (`mtcars`) data set. Specifically, we are going to create a scatterplot of miles per gallon (`mpg`) over weight (1000 lbs, `wt`) that shows the model of the car when we hover over the points. The points are also colored according to the number of cylinders (`cyl`). 
+
+
+## The plot
+
+Hover through the points to see the car model.
+
+```{r, fig.align='center',fig.width=5,fig.height=4}
+library(plotly)
+library(tibble)
+mtcars2 <- mtcars %>% rownames_to_column("car_model")
+plot_ly(mtcars2, x = ~wt, y = ~mpg, text = ~car_model, 
+        color = ~as.factor(cyl))
+```
+
+
